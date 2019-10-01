@@ -27,6 +27,19 @@ class App extends Component {
     }
   }
 
+  filter(items, filter) {
+    switch (filter) {
+      case 'all':
+        return items
+      case 'active':
+        return items.filter( (item) => item.active)
+      case 'completed':
+        return items.filter( (item) => item.completed)
+      default:
+        return items
+    }
+  }
+
   addTodoItem = (e) => {
     console.log()
     e.preventDefault()
