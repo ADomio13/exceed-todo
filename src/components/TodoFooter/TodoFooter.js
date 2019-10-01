@@ -3,7 +3,7 @@ import './TodoFooter.css'
 
 //let filterClasses = []
 
-const TodoFooter = ({currentFilter, onFilterClick}) => {
+const TodoFooter = ({currentFilter, onFilterClick, todosLeft}) => {
   const filters = [
     {id: 'all', name: 'All'},
     {id: 'active', name: 'Active'},
@@ -26,7 +26,7 @@ const TodoFooter = ({currentFilter, onFilterClick}) => {
   return (
     <div className="todo-footer">
       <div className="stats">
-        <span>4 items left</span>
+        <span>{todosLeft} items left</span>
       </div>
       <div className="filters">
         { buttons }

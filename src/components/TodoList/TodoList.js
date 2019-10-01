@@ -2,7 +2,7 @@ import React, {Fragment} from 'react'
 import './TodoList.css'
 import TodoItem from './TodoItem'
 
-const TodoList = ({ todos, onStatusChange }) => {
+const TodoList = ({ todos, onStatusChange, addTodoItem, onInputChange, inputValue }) => {
 
   const elements = todos.map( (element) => {
     return (
@@ -18,10 +18,18 @@ const TodoList = ({ todos, onStatusChange }) => {
 
   return (
     <Fragment>
-      <input className="todo-input" id="todo-input" type="text" placeholder="What needs to be done?"/>
+      <div className="todo-input">
+        <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" />
+        <form onSubmit={addTodoItem}>
+          <input
+            type="text" placeholder="What needs to be done?"
+            onChange={onInputChange}
+            value={inputValue}
+          />
+        </form>
+      </div>
       {elements}
     </Fragment>
-
   )
 }
 

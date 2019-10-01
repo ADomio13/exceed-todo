@@ -15,6 +15,7 @@ class App extends Component {
       this.createTodoItem('Finish Todo')
     ],
     currentFilter: 'all',
+    todoInput: ''
   }
 
   createTodoItem(name) {
@@ -26,30 +27,69 @@ class App extends Component {
     }
   }
 
-  onStatusChange = (id) => {
-    const {todos} = this.state
-    const idx = todos.findIndex( (el) => el.id === id )
-    const newTodo = [...todos.slice(0, idx)]
-    console.log(newTodo)
+  addTodoItem = (e) => {
+    console.log()
+    e.preventDefault()
+    const newItem = this.createTodoItem(this.state.todoInput)
+    this.setState( ({todos}) => {
+      const newArr = [
+        ...todos,
+        newItem
+      ]
+      return {
+        todos: newArr,
+        todoInput: ''
+      }
+    })
   }
 
-  onFilterChange = async (e) => {
-    console.log('clicked on', e.target.id)
-    await this.setState({
+  onInputChange = (e) => {
+    this.setState({
+      todoInput: e.target.value
+    })
+  }
+
+  onStatusChange = (id) => {
+    this.setState( ({ todos }) => {
+      const idx = todos.findIndex( (el) => el.id === id)
+      const oldItem = todos[idx]
+      const newItem = {...oldItem, completed: !oldItem.completed, active: !oldItem.active}
+      const newArr = [
+        ...todos.slice(0, idx),
+        newItem,
+        ...todos.slice(idx + 1)
+      ]
+      return {
+        todos: newArr
+      }
+    })
+  }
+
+  onFilterChange = (e) => {
+    this.setState({
       currentFilter: e.target.id
     })
-    console.log(this.state.currentFilter)
   }
 
   render(){
+    const {todos} = this.state
+    const todosLeft = todos.length - todos.filter( (el)=> el.completed).length
+
     return (
       <div>
         <AppHeader/>
         <div className="main">
-          <TodoList onStatusChange={this.onStatusChange} todos={this.state.todos}/>
+          <TodoList
+            onInputChange={this.onInputChange}
+            todos={this.state.todos}
+            onStatusChange={this.onStatusChange}
+            addTodoItem={this.addTodoItem}
+            inputValue={this.state.todoInput}
+          />
           <TodoFooter
             currentFilter={this.state.currentFilter}
             onFilterClick={this.onFilterChange}
+            todosLeft={todosLeft}
           />
         </div>
         <div className="second"/>
