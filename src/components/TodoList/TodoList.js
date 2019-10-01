@@ -2,7 +2,7 @@ import React, {Fragment} from 'react'
 import './TodoList.css'
 import TodoItem from './TodoItem'
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, onStatusChange }) => {
 
   const elements = todos.map( (element) => {
     return (
@@ -11,8 +11,8 @@ const TodoList = ({ todos }) => {
         id={element.id}
         name={element.name}
         completed={element.completed}
+        onChange={onStatusChange}
       />
-      // <li key={element.id}>{element.name}</li>
     )
   })
 

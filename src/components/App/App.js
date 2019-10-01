@@ -13,9 +13,8 @@ class App extends Component {
       this.createTodoItem('Learn React js'),
       this.createTodoItem('Learn Node js'),
       this.createTodoItem('Finish Todo')
-
     ],
-    searchTerms: ''
+    currentFilter: 'all',
   }
 
   createTodoItem(name) {
@@ -27,17 +26,36 @@ class App extends Component {
     }
   }
 
+  onStatusChange = (id) => {
+    const {todos} = this.state
+    const idx = todos.findIndex( (el) => el.id === id )
+    const newTodo = [...todos.slice(0, idx)]
+    console.log(newTodo)
+  }
+
+  onFilterChange = async (e) => {
+    console.log('clicked on', e.target.id)
+    await this.setState({
+      currentFilter: e.target.id
+    })
+    console.log(this.state.currentFilter)
+  }
+
   render(){
     return (
       <div>
         <AppHeader/>
         <div className="main">
-          <TodoList todos={this.state.todos}/>
-          <TodoFooter/>
+          <TodoList onStatusChange={this.onStatusChange} todos={this.state.todos}/>
+          <TodoFooter
+            currentFilter={this.state.currentFilter}
+            onFilterClick={this.onFilterChange}
+          />
         </div>
+        <div className="second"/>
+        <div className="third"/>
       </div>
       )
-
   }
 }
 

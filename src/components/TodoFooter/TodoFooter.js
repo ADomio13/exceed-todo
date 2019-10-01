@@ -1,16 +1,35 @@
 import React from 'react'
 import './TodoFooter.css'
 
-const TodoFooter = (props) => {
+//let filterClasses = []
+
+const TodoFooter = ({currentFilter, onFilterClick}) => {
+  const filters = [
+    {id: 'all', name: 'All'},
+    {id: 'active', name: 'Active'},
+    {id: 'completed', name: 'Completed'}
+  ]
+
+  const buttons = filters.map(( { id, name }) => {
+    const isActive = currentFilter === id
+    return (
+      <span
+        key={id}
+        id={id}
+        onClick={onFilterClick}
+        className={isActive ? 'current' : null}
+      >{name}
+    </span>
+    )
+  })
+
   return (
     <div className="todo-footer">
       <div className="stats">
         <span>4 items left</span>
       </div>
       <div className="filters">
-        <span className="current">All</span>
-        <span>Active</span>
-        <span>Completed</span>
+        { buttons }
       </div>
       <div className="clear">
         <span>Clear completed</span>

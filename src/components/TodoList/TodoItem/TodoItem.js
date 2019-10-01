@@ -11,6 +11,7 @@ const TodoItem = ({id, name, completed, onChange}) => {
       <input
         type="checkbox"
         id={id}
+        onChange={()=> onChange(id)}
       />
       <label htmlFor={id}>{name}</label>
 

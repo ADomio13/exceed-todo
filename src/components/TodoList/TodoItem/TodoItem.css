@@ -5,7 +5,7 @@
     border: 1px solid #eeeeee;
     border-top: 0;
     text-align: left;
-    padding: 10px;
+    padding: 10px 0;
 }
 
 .completed {
@@ -23,7 +23,7 @@ input[type="checkbox"]:checked + label,
 input[type="checkbox"]:not(:checked) + label {
     display: inline-block;
     position: relative;
-    padding-left: 38px;
+    padding-left: 50px;
     line-height: 20px;
     cursor: pointer;
 }
