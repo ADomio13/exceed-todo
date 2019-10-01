@@ -1,0 +1,76 @@
+.todo-item {
+    width: 100%;
+    font-size: 24px;
+    list-style: none;
+    border: 1px solid #eeeeee;
+    border-top: 0;
+    text-align: left;
+    padding: 10px;
+}
+
+.completed {
+    color: #cccccc;
+    text-decoration: line-through;
+}
+
+input[type="checkbox"]:checked,
+input[type="checkbox"]:not(:checked)
+{
+    position: absolute;
+    left: -9999px;
+}
+input[type="checkbox"]:checked + label,
+input[type="checkbox"]:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 38px;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="checkbox"]:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: -2px;
+    width: 24px;
+    height: 24px;;
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+input[type="checkbox"]:checked + label:after,
+input[type="checkbox"]:not(:checked) + label:after {
+    left: 13px;
+    top: 5px;
+    width: 20px;
+    height: 10px;
+    border-radius: 1px;
+    border-left: 4px solid green;
+    border-bottom: 4px solid green;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+input[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+}
