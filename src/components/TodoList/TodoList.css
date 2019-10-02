@@ -40,3 +40,8 @@
 .input-selectall {
     cursor: pointer;
 }
+
+.input-selectall.hide {
+    visibility: hidden;
+    cursor: pointer;
+}

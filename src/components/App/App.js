@@ -9,10 +9,10 @@ class App extends Component {
   maxId = 1
   state = {
     todos: [
-      this.createTodoItem('Learn CSS'),
-      this.createTodoItem('Learn React js'),
-      this.createTodoItem('Learn Node js'),
-      this.createTodoItem('Finish Todo')
+      // this.createTodoItem('Learn CSS'),
+      // this.createTodoItem('Learn React js'),
+      // this.createTodoItem('Learn Node js'),
+      // this.createTodoItem('Finish Todo')
     ],
     currentFilter: 'all',
     todoInput: ''
@@ -127,7 +127,7 @@ class App extends Component {
 
   render(){
     const {todos, currentFilter} = this.state
-    const todosLeft = todos.length - todos.filter( (el)=> el.completed).length
+    const todosLeft = todos.length - todos.filter((el)=> el.completed).length
 
     const visibleItems = this.filter(todos, currentFilter)
 
@@ -144,16 +144,15 @@ class App extends Component {
             selectAll={this.selectAll}
             inputValue={this.state.todoInput}
           />
-          < TodoFooter
+          { todos.length ? < TodoFooter
             todosCount={todos.length}
             todosLeft={todosLeft}
             currentFilter={this.state.currentFilter}
             filterClick={this.onFilterChange}
             clearCompleted={this.onClearCompleted}
-            />
+            /> : null }
         </div>
-        <div className="second"/>
-        <div className="third"/>
+        { todos.length ? <div><div className="second"/><div className="third"/></div> : null }
       </div>
       )
   }
