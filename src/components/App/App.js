@@ -18,15 +18,12 @@ class App extends Component {
     todoInput: ''
   }
 
-  createTodoItem(name) {
-    return {
-      name,
-      id: this.maxId++,
-      active: true,
-      completed: false
-    }
-  }
+  onFilterChange = (e) => {
+    this.setState({
+      currentFilter: e.target.id
 
+    })
+  }
   filter(items, filter) {
     switch (filter) {
       case 'all':
@@ -37,6 +34,15 @@ class App extends Component {
         return items.filter( (item) => item.completed)
       default:
         return items
+    }
+  }
+
+  createTodoItem(name) {
+    return {
+      name,
+      id: this.maxId++,
+      active: true,
+      completed: false
     }
   }
 
@@ -78,15 +84,15 @@ class App extends Component {
     })
   }
 
-  onFilterChange = (e) => {
-    this.setState({
-      currentFilter: e.target.id
-    })
+  onClearCompleted = () => {
+    console.log('clicked clear completed')
   }
 
   render(){
-    const {todos} = this.state
+    const {todos, currentFilter} = this.state
     const todosLeft = todos.length - todos.filter( (el)=> el.completed).length
+
+    const visibleItems = this.filter(todos, currentFilter)
 
     return (
       <div>
@@ -94,15 +100,16 @@ class App extends Component {
         <div className="main">
           <TodoList
             onInputChange={this.onInputChange}
-            todos={this.state.todos}
+            todos={visibleItems}
             onStatusChange={this.onStatusChange}
             addTodoItem={this.addTodoItem}
             inputValue={this.state.todoInput}
           />
           <TodoFooter
-            currentFilter={this.state.currentFilter}
-            onFilterClick={this.onFilterChange}
             todosLeft={todosLeft}
+            currentFilter={this.state.currentFilter}
+            filterClick={this.onFilterChange}
+            clearCompleted={this.onClearCompleted}
           />
         </div>
         <div className="second"/>

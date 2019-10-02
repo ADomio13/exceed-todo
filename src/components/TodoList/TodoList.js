@@ -19,7 +19,7 @@ const TodoList = ({ todos, onStatusChange, addTodoItem, onInputChange, inputValu
   return (
     <Fragment>
       <div className="todo-input">
-        <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" />
+        <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" alt="arrow" />
         <form onSubmit={addTodoItem}>
           <input
             type="text" placeholder="What needs to be done?"

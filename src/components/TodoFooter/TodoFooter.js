@@ -3,7 +3,7 @@ import './TodoFooter.css'
 
 //let filterClasses = []
 
-const TodoFooter = ({currentFilter, onFilterClick, todosLeft}) => {
+const TodoFooter = ({todosLeft, currentFilter, filterClick, clearCompleted}) => {
   const filters = [
     {id: 'all', name: 'All'},
     {id: 'active', name: 'Active'},
@@ -16,7 +16,7 @@ const TodoFooter = ({currentFilter, onFilterClick, todosLeft}) => {
       <span
         key={id}
         id={id}
-        onClick={onFilterClick}
+        onClick={filterClick}
         className={isActive ? 'current' : null}
       >{name}
     </span>
@@ -32,7 +32,7 @@ const TodoFooter = ({currentFilter, onFilterClick, todosLeft}) => {
         { buttons }
       </div>
       <div className="clear">
-        <span>Clear completed</span>
+        <span onClick={clearCompleted}>Clear completed</span>
       </div>
     </div>
   )
