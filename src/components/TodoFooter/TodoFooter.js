@@ -24,6 +24,7 @@ const TodoFooter = ({ todosCount, todosLeft, currentFilter, filterClick, clearCo
   })
 
   return (
+    <div>
     <div className="todo-footer">
       <div className="stats">
         <span>{todosLeft} items left</span>
@@ -33,8 +34,8 @@ const TodoFooter = ({ todosCount, todosLeft, currentFilter, filterClick, clearCo
       </div>
       <div className="clear">
         { todosCount - todosLeft ? <span onClick={clearCompleted}>Clear completed</span> : null }
-
       </div>
+    </div>
     </div>
   )
 }

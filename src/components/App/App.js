@@ -75,7 +75,6 @@ class App extends Component {
         todos: newArr
       }
     })
-    console.log('clicked delete', id)
   }
 
   onInputChange = (e) => {
@@ -94,6 +93,22 @@ class App extends Component {
         newItem,
         ...todos.slice(idx + 1)
       ]
+      return {
+        todos: newArr
+      }
+    })
+  }
+
+  selectAll = () => {
+    
+    this.setState( ({todos}) => {
+      const newArr = todos.map( (item) => {
+        return {
+          ...item,
+          active: !item.active,
+          completed: !item.completed
+        }
+      })
       return {
         todos: newArr
       }
@@ -126,15 +141,16 @@ class App extends Component {
             onStatusChange={this.onStatusChange}
             addTodoItem={this.addTodoItem}
             deleteTodoItem={this.deleteTodoItem}
+            selectAll={this.selectAll}
             inputValue={this.state.todoInput}
           />
-          <TodoFooter
+          < TodoFooter
             todosCount={todos.length}
             todosLeft={todosLeft}
             currentFilter={this.state.currentFilter}
             filterClick={this.onFilterChange}
             clearCompleted={this.onClearCompleted}
-          />
+            />
         </div>
         <div className="second"/>
         <div className="third"/>

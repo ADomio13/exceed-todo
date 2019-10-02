@@ -10,7 +10,7 @@ const TodoItem = ({id, name, completed, onStatusChange, onDelete}) => {
     <li className={classNames}>
       <input
         type="checkbox"
-        defaultChecked={completed}
+        checked={completed}
         id={id}
         onChange={()=> onStatusChange(id)}
       />
