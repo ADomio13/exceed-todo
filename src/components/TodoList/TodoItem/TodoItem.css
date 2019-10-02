@@ -1,4 +1,5 @@
 .todo-item {
+    display: flex;
     width: 100%;
     font-size: 24px;
     list-style: none;
@@ -6,6 +7,7 @@
     border-top: 0;
     text-align: left;
     padding: 10px 0;
+    justify-content: space-between;
 }
 
 .completed label {
@@ -73,4 +75,18 @@ input[type="checkbox"]:not(:checked) + label:after {
 
 input[type="checkbox"]:checked + label:after {
     opacity: 1;
+}
+
+.todo-delete {
+    font-size: 20px;
+    display: none;
+    margin-right: 10px;
+}
+
+.todo-item:hover .todo-delete {
+    cursor: pointer;
+    color: #fcc1b1;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
 }

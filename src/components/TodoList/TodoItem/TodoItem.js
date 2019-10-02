@@ -1,7 +1,7 @@
 import React from 'react'
 import './TodoItem.css'
 
-const TodoItem = ({id, name, completed, onChange}) => {
+const TodoItem = ({id, name, completed, onStatusChange, onDelete}) => {
   let classNames = 'todo-item'
   if(completed){
     classNames += ' completed'
@@ -12,10 +12,13 @@ const TodoItem = ({id, name, completed, onChange}) => {
         type="checkbox"
         defaultChecked={completed}
         id={id}
-        onChange={()=> onChange(id)}
+        onChange={()=> onStatusChange(id)}
       />
       <label htmlFor={id}>{name}</label>
-
+      <span
+        className="todo-delete"
+        onClick={() => onDelete(id)}
+      >&#10005;</span>
     </li>
   )
 }

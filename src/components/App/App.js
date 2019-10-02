@@ -47,19 +47,35 @@ class App extends Component {
   }
 
   addTodoItem = (e) => {
-    console.log()
+    const { todoInput }  = this.state
     e.preventDefault()
-    const newItem = this.createTodoItem(this.state.todoInput)
-    this.setState( ({todos}) => {
+    if(todoInput.trim()){
+      const newItem = this.createTodoItem(this.state.todoInput)
+      this.setState( ({todos}) => {
+        const newArr = [
+          ...todos,
+          newItem
+        ]
+        return {
+          todos: newArr,
+          todoInput: ''
+        }
+      })
+    }
+  }
+
+  deleteTodoItem = (id) => {
+    this.setState( ({ todos }) => {
+      const idx = todos.findIndex( (el) => el.id === id )
       const newArr = [
-        ...todos,
-        newItem
+        ...todos.slice(0, idx),
+        ...todos.slice(idx +1)
       ]
       return {
-        todos: newArr,
-        todoInput: ''
+        todos: newArr
       }
     })
+    console.log('clicked delete', id)
   }
 
   onInputChange = (e) => {
@@ -101,7 +117,7 @@ class App extends Component {
     const visibleItems = this.filter(todos, currentFilter)
 
     return (
-      <div>
+      <div className="wrapper">
         <AppHeader/>
         <div className="main">
           <TodoList
@@ -109,9 +125,11 @@ class App extends Component {
             todos={visibleItems}
             onStatusChange={this.onStatusChange}
             addTodoItem={this.addTodoItem}
+            deleteTodoItem={this.deleteTodoItem}
             inputValue={this.state.todoInput}
           />
           <TodoFooter
+            todosCount={todos.length}
             todosLeft={todosLeft}
             currentFilter={this.state.currentFilter}
             filterClick={this.onFilterChange}
