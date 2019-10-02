@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.todo-input form {
+    width: 100%;
+}
+
 .todo-input input {
     font-size: 18px;
     width: 100%;

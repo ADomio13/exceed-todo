@@ -15,7 +15,8 @@ class App extends Component {
       // this.createTodoItem('Finish Todo')
     ],
     currentFilter: 'all',
-    todoInput: ''
+    todoInput: '',
+    currentCheck: true
   }
 
   onFilterChange = (e) => {
@@ -100,17 +101,17 @@ class App extends Component {
   }
 
   selectAll = () => {
-    
-    this.setState( ({todos}) => {
+    this.setState( ({todos, currentCheck}) => {
       const newArr = todos.map( (item) => {
         return {
           ...item,
-          active: !item.active,
-          completed: !item.completed
+          active: !currentCheck,
+          completed: currentCheck
         }
       })
       return {
-        todos: newArr
+        todos: newArr,
+        currentCheck: !currentCheck
       }
     })
   }
