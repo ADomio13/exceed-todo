@@ -85,7 +85,13 @@ class App extends Component {
   }
 
   onClearCompleted = () => {
-    console.log('clicked clear completed')
+    const newArr = [...this.state.todos]
+    const activeItems = newArr.filter( (el) => el.active)
+    this.setState( ({todos}) => {
+      return {
+        todos: activeItems
+      }
+    })
   }
 
   render(){
