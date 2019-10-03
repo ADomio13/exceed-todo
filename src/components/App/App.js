@@ -8,6 +8,7 @@ import TodoFooter from "../TodoFooter"
 import UserPanel from '../UserPanel'
 import Register from '../Register'
 import Login from '../Login'
+import todoService from '../../api/todoService'
 
 class App extends Component {
 
@@ -141,30 +142,30 @@ class App extends Component {
       <BrowserRouter>
       <div className="wrapper">
         <AppHeader/>
-        <div className="main">
-          <UserPanel/>
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/login' component={Login} />
-          <TodoList
-            onInputChange={this.onInputChange}
-            todos={visibleItems}
-            onStatusChange={this.onStatusChange}
-            addTodoItem={this.addTodoItem}
-            deleteTodoItem={this.deleteTodoItem}
-            selectAll={this.selectAll}
-            inputValue={this.state.todoInput}
-          />
-          { todos.length ?
-            < TodoFooter
-            todosCount={todos.length}
-            todosLeft={todosLeft}
-            currentFilter={this.state.currentFilter}
-            filterClick={this.onFilterChange}
-            clearCompleted={this.onClearCompleted}
+        <div>
+          <div className="main">
+            <UserPanel/>
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            <TodoList
+              onInputChange={this.onInputChange}
+              todos={visibleItems}
+              onStatusChange={this.onStatusChange}
+              addTodoItem={this.addTodoItem}
+              deleteTodoItem={this.deleteTodoItem}
+              selectAll={this.selectAll}
+              inputValue={this.state.todoInput}
             />
-            : null }
-        </div>
+            <TodoFooter
+              todosCount={todos.length}
+              todosLeft={todosLeft}
+              currentFilter={this.state.currentFilter}
+              filterClick={this.onFilterChange}
+              clearCompleted={this.onClearCompleted}
+            />
+          </div>
         { todos.length ? <div><div className="second"/><div className="third"/></div> : null }
+        </div>
       </div>
       </BrowserRouter>
       )

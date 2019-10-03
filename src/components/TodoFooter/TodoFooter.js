@@ -23,21 +23,25 @@ const TodoFooter = ({ todosCount, todosLeft, currentFilter, filterClick, clearCo
     )
   })
 
-  return (
-    <div>
-    <div className="todo-footer">
-      <div className="stats">
-        <span>{todosLeft} items left</span>
+  if(todosCount) {
+    return (
+      <div>
+        <div className="todo-footer">
+          <div className="stats">
+            <span>{todosLeft} items left</span>
+          </div>
+          <div className="filters">
+            { buttons }
+          </div>
+          <div className="clear">
+            { todosCount - todosLeft ? <span onClick={clearCompleted}>Clear completed</span> : null }
+          </div>
+        </div>
       </div>
-      <div className="filters">
-        { buttons }
-      </div>
-      <div className="clear">
-        { todosCount - todosLeft ? <span onClick={clearCompleted}>Clear completed</span> : null }
-      </div>
-    </div>
-    </div>
-  )
+    )
+  } else{
+    return null
+  }
 }
 
 export default TodoFooter
