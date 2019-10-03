@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 import './TodoList.css'
 import TodoItem from './TodoItem'
 

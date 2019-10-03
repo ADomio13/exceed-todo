@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
+import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css'
-import AppHeader from "../AppHeader";
-import TodoList from "../TodoList";
-import TodoFooter from "../TodoFooter";
+
+import AppHeader from "../AppHeader"
+import TodoList from "../TodoList"
+import TodoFooter from "../TodoFooter"
+import UserPanel from '../UserPanel'
+import Register from '../Register'
+import Login from '../Login'
 
 class App extends Component {
 
@@ -133,9 +138,13 @@ class App extends Component {
     const visibleItems = this.filter(todos, currentFilter)
 
     return (
+      <BrowserRouter>
       <div className="wrapper">
         <AppHeader/>
         <div className="main">
+          <UserPanel/>
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
           <TodoList
             onInputChange={this.onInputChange}
             todos={visibleItems}
@@ -145,16 +154,19 @@ class App extends Component {
             selectAll={this.selectAll}
             inputValue={this.state.todoInput}
           />
-          { todos.length ? < TodoFooter
+          { todos.length ?
+            < TodoFooter
             todosCount={todos.length}
             todosLeft={todosLeft}
             currentFilter={this.state.currentFilter}
             filterClick={this.onFilterChange}
             clearCompleted={this.onClearCompleted}
-            /> : null }
+            />
+            : null }
         </div>
         { todos.length ? <div><div className="second"/><div className="third"/></div> : null }
       </div>
+      </BrowserRouter>
       )
   }
 }
