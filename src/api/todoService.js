@@ -13,10 +13,10 @@ class todoService {
     const url = `${this._apiUrl}add/`
     const res = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify({name: name}),
       headers:{
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({name: name}),
     })
     if(!res.ok){
       throw new Error(`Error, ${res.status}`)
@@ -28,10 +28,10 @@ class todoService {
     const url = `${this._apiUrl}delete/${id}`
     const res = await fetch(url, {
       method: 'DELETE',
-      body: id,
       headers:{
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+        'Content-Type': 'application/json'
+      },
+      body: id,
     })
     if(!res.ok){
       throw new Error(`Error, ${res.status}`)
@@ -39,6 +39,20 @@ class todoService {
     return await res.json()
   }
 
+  async deleteFew(ids) {
+    const url = `${this._apiUrl}delete/few/${ids}`
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: ids
+    })
+    if(!res.ok){
+      throw new Error(`Error: ${res.status}`)
+    }
+    return await res.json()
+  }
 }
 
 export default todoService
