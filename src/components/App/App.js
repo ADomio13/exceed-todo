@@ -12,17 +12,38 @@ import todoService from '../../api/todoService'
 
 class App extends Component {
 
-  maxId = 1
+  todoService = new todoService()
+
   state = {
     todos: [
-      // this.createTodoItem('Learn CSS'),
-      // this.createTodoItem('Learn React js'),
-      // this.createTodoItem('Learn Node js'),
-      // this.createTodoItem('Finish Todo')
+      // this.createTodoItem(1, 'Learn CSS'),
+      // this.createTodoItem(2, 'Learn React js'),
+      // this.createTodoItem(3, 'Learn Node js'),
+      // this.createTodoItem(4, 'Finish Todo')
     ],
     currentFilter: 'all',
     todoInput: '',
     currentCheck: true
+  }
+
+  componentDidMount() {
+    this.getTodosFromDB()
+  }
+
+
+  async getTodosFromDB() {
+    const res = await this.todoService.getAllTodos()
+    const newArr = res.map( (item) => {
+      return {
+        name: item.name,
+        id: item._id,
+        active: item.isActive,
+        completed: !item.isActive
+      }
+    })
+    this.setState({
+      todos: newArr
+    })
   }
 
   onFilterChange = (e) => {
@@ -44,20 +65,24 @@ class App extends Component {
     }
   }
 
-  createTodoItem(name) {
+  createTodoItem(_id, name) {
     return {
       name,
-      id: this.maxId++,
+      id: _id,
       active: true,
       completed: false
     }
   }
 
-  addTodoItem = (e) => {
+  addTodoItem = async (e) => {
     const { todoInput }  = this.state
     e.preventDefault()
     if(todoInput.trim()){
-      const newItem = this.createTodoItem(this.state.todoInput)
+      const addDB = await this.todoService.createTodo(todoInput)
+      if(addDB._id){
+        console.log(addDB._id)
+      }
+      const newItem = this.createTodoItem(addDB._id, todoInput)
       this.setState( ({todos}) => {
         const newArr = [
           ...todos,
@@ -71,17 +96,20 @@ class App extends Component {
     }
   }
 
-  deleteTodoItem = (id) => {
-    this.setState( ({ todos }) => {
-      const idx = todos.findIndex( (el) => el.id === id )
-      const newArr = [
-        ...todos.slice(0, idx),
-        ...todos.slice(idx +1)
-      ]
-      return {
-        todos: newArr
-      }
-    })
+  deleteTodoItem = async (id) => {
+    const deleteDB = await this.todoService.deleteOne(id)
+    if(deleteDB){
+      this.setState( ({ todos }) => {
+        const idx = todos.findIndex( (el) => el.id === id )
+        const newArr = [
+          ...todos.slice(0, idx),
+          ...todos.slice(idx +1)
+        ]
+        return {
+          todos: newArr
+        }
+      })
+    }
   }
 
   onInputChange = (e) => {
@@ -93,6 +121,7 @@ class App extends Component {
   onStatusChange = (id) => {
     this.setState( ({ todos }) => {
       const idx = todos.findIndex( (el) => el.id === id)
+      console.log('index', idx)
       const oldItem = todos[idx]
       const newItem = {...oldItem, completed: !oldItem.completed, active: !oldItem.active}
       const newArr = [

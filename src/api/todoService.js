@@ -28,9 +28,6 @@ class todoService {
     const url = `${this._apiUrl}delete/${id}`
     const res = await fetch(url, {
       method: 'DELETE',
-      headers:{
-        'Content-Type': 'application/json'
-      },
       body: id,
     })
     if(!res.ok){
