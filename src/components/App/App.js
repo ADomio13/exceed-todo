@@ -80,19 +80,18 @@ class App extends Component {
     if(todoInput.trim()){
       const addDB = await this.todoService.createTodo(todoInput)
       if(addDB._id){
-        console.log(addDB._id)
+        const newItem = this.createTodoItem(addDB._id, todoInput)
+        this.setState( ({todos}) => {
+          const newArr = [
+            ...todos,
+            newItem
+          ]
+          return {
+            todos: newArr,
+            todoInput: ''
+          }
+        })
       }
-      const newItem = this.createTodoItem(addDB._id, todoInput)
-      this.setState( ({todos}) => {
-        const newArr = [
-          ...todos,
-          newItem
-        ]
-        return {
-          todos: newArr,
-          todoInput: ''
-        }
-      })
     }
   }
 
@@ -118,21 +117,24 @@ class App extends Component {
     })
   }
 
-  onStatusChange = (id) => {
-    this.setState( ({ todos }) => {
-      const idx = todos.findIndex( (el) => el.id === id)
-      console.log('index', idx)
-      const oldItem = todos[idx]
-      const newItem = {...oldItem, completed: !oldItem.completed, active: !oldItem.active}
-      const newArr = [
-        ...todos.slice(0, idx),
-        newItem,
-        ...todos.slice(idx + 1)
-      ]
-      return {
+  onStatusChange = async (id) => {
+
+    const { todos } = this.state
+    const idx = todos.findIndex( (el) => el.id === id)
+    const oldItem = todos[idx]
+    const newItem = {...oldItem, completed: !oldItem.completed, active: !oldItem.active}
+    const newArr = [
+      ...todos.slice(0, idx),
+      newItem,
+      ...todos.slice(idx + 1)
+    ]
+    const changeDB = await this.todoService.edit(id, !oldItem.completed)
+    if(changeDB){
+      this.setState({
         todos: newArr
-      }
-    })
+      })
+    }
+
   }
 
   selectAll = () => {

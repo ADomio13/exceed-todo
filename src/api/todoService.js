@@ -24,6 +24,21 @@ class todoService {
     return await res.json()
   }
 
+  async edit(id, completed) {
+    const url = `${this._apiUrl}edit/${id}`
+    const res = await fetch(url, {
+      method: 'PATCH',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({isActive: !completed})
+    })
+    if(!res.ok){
+      throw new Error(`Error, ${res.status}`)
+    }
+    return await res.json()
+  }
+
   async deleteOne(id) {
     const url = `${this._apiUrl}delete/${id}`
     const res = await fetch(url, {
