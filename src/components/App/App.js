@@ -151,14 +151,18 @@ class App extends Component {
     })
   }
 
-  onClearCompleted = () => {
+  onClearCompleted = async () => {
     const newArr = [...this.state.todos]
     const activeItems = newArr.filter( (el) => el.active)
-    this.setState( ({todos}) => {
-      return {
-        todos: activeItems
-      }
-    })
+    const completedItems = newArr.filter( (el) => el.completed).map( (el) => el.id)
+    const deleteFew = await this.todoService.deleteFew(completedItems)
+    if(deleteFew.result.deletedCount > 0){
+      this.setState( ({todos}) => {
+        return {
+          todos: activeItems
+        }
+      })
+    }
   }
 
   render(){
