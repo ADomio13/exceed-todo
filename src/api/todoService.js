@@ -1,8 +1,7 @@
 class todoService {
-  _apiUrl = 'http://localhost:3001/todos/'
 
   async getAllTodos() {
-    const res = await fetch(this._apiUrl)
+    const res = await fetch('/todos')
     if(!res.ok){
       throw new Error(`Error, ${res.status}`)
     }
@@ -10,7 +9,7 @@ class todoService {
   }
 
   async createTodo(name) {
-    const url = `${this._apiUrl}add/`
+    const url = '/todos/add/'
     const res = await fetch(url, {
       method: 'POST',
       headers:{
@@ -25,7 +24,7 @@ class todoService {
   }
 
   async edit(id, completed) {
-    const url = `${this._apiUrl}edit/${id}`
+    const url = `/todos/edit/${id}`
     const res = await fetch(url, {
       method: 'PATCH',
       headers:{
@@ -39,8 +38,8 @@ class todoService {
     return await res.json()
   }
 
-  async deleteOne(id) {
-    const url = `${this._apiUrl}delete/${id}`
+  static async deleteOne(id) {
+    const url = `/todos/delete/${id}`
     const res = await fetch(url, {
       method: 'DELETE',
       body: id,
@@ -52,7 +51,7 @@ class todoService {
   }
 
   async deleteFew(ids) {
-    const url = `${this._apiUrl}delete/few/${ids}`
+    const url = `/todos/delete/few/${ids}`
     const res = await fetch(url, {
       method: 'DELETE',
       body: ids

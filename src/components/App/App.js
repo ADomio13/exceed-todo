@@ -96,7 +96,7 @@ class App extends Component {
   }
 
   deleteTodoItem = async (id) => {
-    const deleteDB = await this.todoService.deleteOne(id)
+    const deleteDB = await todoService.deleteOne(id)
     if(deleteDB){
       this.setState( ({ todos }) => {
         const idx = todos.findIndex( (el) => el.id === id )
