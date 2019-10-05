@@ -1,7 +1,7 @@
 import React from 'react'
-import './Login.css'
+import s from './Login.module.css'
 
-const Login = () => {
+const Login = (props) => {
   return (
     <p>Login</p>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
-import './AppHeader.css'
+import s from './AppHeader.module.css'
 
 const AppHeader = (props) => {
   return (
-    <h1 className="todo-title">todos</h1>
+    <h1 className={s.todoTitle}>todos</h1>
   )
 }
 

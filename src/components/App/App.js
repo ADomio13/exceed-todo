@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import './App.css'
+import s from './App.module.css'
 
 import AppHeader from "../AppHeader"
 import TodoList from "../TodoList"
@@ -159,10 +159,8 @@ class App extends Component {
     const completedItems = newArr.filter( (el) => el.completed).map( (el) => el.id)
     const deleteFew = await this.todoService.deleteFew(completedItems)
     if(deleteFew.result.deletedCount > 0){
-      this.setState( ({todos}) => {
-        return {
-          todos: activeItems
-        }
+      this.setState({
+        todos: activeItems
       })
     }
   }
@@ -177,11 +175,11 @@ class App extends Component {
       <BrowserRouter>
       <div className="wrapper">
         <AppHeader/>
+        <Route exact path='/register' component={Register} />
+        <Route exact path='/login' component={Login} />
         <div>
-          <div className="main">
+          <div className={s.main}>
             <UserPanel/>
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
             <TodoList
               onInputChange={this.onInputChange}
               todos={visibleItems}
@@ -199,7 +197,7 @@ class App extends Component {
               clearCompleted={this.onClearCompleted}
             />
           </div>
-        { todos.length ? <div><div className="second"/><div className="third"/></div> : null }
+        { todos.length ? <div><div className={s.second}/><div className={s.third}/></div> : null }
         </div>
       </div>
       </BrowserRouter>

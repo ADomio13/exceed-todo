@@ -1,7 +1,5 @@
 import React from 'react'
-import './TodoFooter.css'
-
-//let filterClasses = []
+import s from './TodoFooter.module.css'
 
 const TodoFooter = ({ todosCount, todosLeft, currentFilter, filterClick, clearCompleted }) => {
   const filters = [
@@ -17,7 +15,7 @@ const TodoFooter = ({ todosCount, todosLeft, currentFilter, filterClick, clearCo
         key={id}
         id={id}
         onClick={filterClick}
-        className={isActive ? 'current' : null}
+        className={isActive ? s.current : null}
       >{name}
     </span>
     )
@@ -26,14 +24,14 @@ const TodoFooter = ({ todosCount, todosLeft, currentFilter, filterClick, clearCo
   if(todosCount) {
     return (
       <div>
-        <div className="todo-footer">
-          <div className="stats">
+        <div className={s.todoFooter}>
+          <div className={s.stats}>
             <span>{todosLeft} items left</span>
           </div>
-          <div className="filters">
+          <div className={s.filters}>
             { buttons }
           </div>
-          <div className="clear">
+          <div className={s.clear}>
             { todosCount - todosLeft ? <span onClick={clearCompleted}>Clear completed</span> : null }
           </div>
         </div>

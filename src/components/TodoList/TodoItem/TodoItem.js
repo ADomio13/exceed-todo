@@ -1,10 +1,10 @@
 import React from 'react'
-import './TodoItem.css'
+import s from './TodoItem.module.css'
 
 const TodoItem = ({id, name, completed, onStatusChange, onDelete}) => {
-  let classNames = 'todo-item'
+  let classNames = s.todoItem
   if(completed){
-    classNames += ' completed'
+    classNames += ` ${s.completed}`
   }
   return (
     <li className={classNames}>
@@ -16,7 +16,7 @@ const TodoItem = ({id, name, completed, onStatusChange, onDelete}) => {
       />
       <label htmlFor={id}>{name}</label>
       <span
-        className="todo-delete"
+        className={s.todoDelete}
         onClick={() => onDelete(id)}
       >&#10005;</span>
     </li>

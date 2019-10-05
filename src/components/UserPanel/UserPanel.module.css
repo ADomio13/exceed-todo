@@ -1,4 +1,4 @@
-.user-panel {
+.userPanel {
     display: flex;
     width: 100%;
     border-bottom: 1px solid #eeeeee;
@@ -6,7 +6,7 @@
     justify-content: flex-end;
 }
 
-.user-panel span a {
+.userPanel span a {
     padding: 3px;
     border: 1px solid #cccccc;
     border-radius: 3px;
@@ -14,11 +14,11 @@
     cursor: pointer;
 }
 
-.user-panel span a {
+.userPanel span a {
     text-decoration: none;
     color: black;
 }
 
-.user-panel .active {
+.userPanel .active {
     background-color: #efb7a7;
 }

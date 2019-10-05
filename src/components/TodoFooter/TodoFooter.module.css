@@ -1,4 +1,4 @@
-.todo-footer {
+.todoFooter {
     text-align: center;
     width: 100%;
     color: #5f6369;
@@ -11,6 +11,10 @@
     padding: 3px;
     border: 1px solid #cccccc;
     border-radius: 3px;
+}
+
+.stats {
+
 }
 
 .filters {
