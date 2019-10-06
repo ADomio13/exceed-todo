@@ -177,28 +177,32 @@ class App extends Component {
         <AppHeader/>
         <Route exact path='/register' component={Register} />
         <Route exact path='/login' component={Login} />
-        <div>
-          <div className={s.main}>
-            <UserPanel/>
-            <TodoList
-              onInputChange={this.onInputChange}
-              todos={visibleItems}
-              onStatusChange={this.onStatusChange}
-              addTodoItem={this.addTodoItem}
-              deleteTodoItem={this.deleteTodoItem}
-              selectAll={this.selectAll}
-              inputValue={this.state.todoInput}
-            />
-            <TodoFooter
-              todosCount={todos.length}
-              todosLeft={todosLeft}
-              currentFilter={this.state.currentFilter}
-              filterClick={this.onFilterChange}
-              clearCompleted={this.onClearCompleted}
-            />
-          </div>
-        { todos.length ? <div><div className={s.second}/><div className={s.third}/></div> : null }
-        </div>
+        <Route exact path='/' render={ () => {
+          return (
+            <div>
+              <div className={s.main}>
+                <UserPanel/>
+                <TodoList
+                  onInputChange={this.onInputChange}
+                  todos={visibleItems}
+                  onStatusChange={this.onStatusChange}
+                  addTodoItem={this.addTodoItem}
+                  deleteTodoItem={this.deleteTodoItem}
+                  selectAll={this.selectAll}
+                  inputValue={this.state.todoInput}
+                />
+                <TodoFooter
+                  todosCount={todos.length}
+                  todosLeft={todosLeft}
+                  currentFilter={this.state.currentFilter}
+                  filterClick={this.onFilterChange}
+                  clearCompleted={this.onClearCompleted}
+                />
+              </div>
+              { todos.length ? <div><div className={s.second}/><div className={s.third}/></div> : null }
+            </div>
+          )
+        }} />
       </div>
       </BrowserRouter>
       )
