@@ -19,6 +19,6 @@
     color: black;
 }
 
-.userPanel .active {
+.activeLink {
     background-color: #efb7a7;
 }

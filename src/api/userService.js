@@ -1,11 +1,11 @@
-class userService {
+export default class userService {
 
-  async registration() {
+  async registration(user) {
     const url = `/users/register`
     const res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: req.body
+      body: JSON.stringify(user)
     })
     if(!res.ok) {
       throw new Error(`Error, ${res.status}`)
