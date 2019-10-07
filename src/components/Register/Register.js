@@ -30,9 +30,9 @@ export default class Register extends Component {
           <form onSubmit={this.registerUser}>
             <div className={s.formGroup}>
               <label htmlFor="email">E-mail</label>
-              <input type="text" name="email" placeholder="E-mail"/>
+              <input type="text" name="email" placeholder="E-mail" required/>
               <label htmlFor="password">Password</label>
-              <input type="password" name="password" placeholder="Password"/>
+              <input type="password" name="password" placeholder="Password" required/>
               <label htmlFor="firstName">First name</label>
               <input type="text" name="firstName" placeholder="First name"/>
               <label htmlFor="lastName">Last name</label>
